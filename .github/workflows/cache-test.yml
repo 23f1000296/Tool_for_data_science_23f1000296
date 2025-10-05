@@ -2,7 +2,7 @@ name: Cache Dependencies Example
 
 on:
   push:
-  workflow_dispatch:  # allows manual trigger
+  workflow_dispatch:
 
 jobs:
   cache-job:
@@ -12,19 +12,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ✅ Step name AND ID both include 'prime-cache-498f713'
       - name: prime-cache-498f713
-        id: cache-deps
+        id: prime-cache-498f713
         uses: actions/cache@v4
         with:
-          path: ~/.cache/pip          # caching Python dependencies
+          path: ~/.cache/pip
           key: cache-498f713
           restore-keys: |
             cache-
 
-      - name: Display cache result
-        run: echo "Cache hit: ${{ steps.cache-deps.outputs.cache-hit }}"
+      - name: Show cache hit/miss
+        run: echo "Cache hit: ${{ steps.prime-cache-498f713.outputs.cache-hit }}"
 
-      - name: Install dependencies (example)
+      - name: Install dependencies
         run: |
           python -m venv .venv
           source .venv/bin/activate
