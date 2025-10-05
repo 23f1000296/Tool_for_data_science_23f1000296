@@ -1,15 +1,21 @@
-name: Test Action
+name: Test Workflow - 23f1000296
 
 on:
-  push:
-    branches: [ main ]
+  push:                     # Runs whenever you push new commits
+  workflow_dispatch:        # Allows manual trigger from GitHub UI
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Run on the latest Ubuntu VM
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: 23f1000296@ds.study.iitm.ac.in
-        run: echo "Hello, world! This is my GitHub Action."
+        run: echo "Hello, world! Workflow triggered successfully 🚀"
+
+      - name: Display current date and branch
+        run: |
+          echo "Current date: $(date)"
+          echo "Running on branch: $GITHUB_REF_NAME"
