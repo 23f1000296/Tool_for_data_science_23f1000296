@@ -1,0 +1,32 @@
+name: Cache Dependencies Example
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ✅ Step name AND ID both include 'prime-cache-498f713'
+      - name: prime-cache-498f713
+        id: prime-cache-498f713
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: cache-498f713
+          restore-keys: |
+            cache-
+
+      - name: Show cache hit/miss
+        run: echo "Cache hit: ${{ steps.prime-cache-498f713.outputs.cache-hit }}"
+
+      - name: Install dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install requests

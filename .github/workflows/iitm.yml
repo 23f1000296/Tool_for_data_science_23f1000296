@@ -1,0 +1,20 @@
+name: Test Workflow - 23f1000296
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 👇 IMPORTANT: This step name must exactly match your email address
+      - name: 23f1000296@ds.study.iitm.ac.in
+        run: echo "Hello, world! This workflow was triggered successfully 🚀"
+
+      - name: Confirm success
+        run: echo "Workflow completed successfully!"
