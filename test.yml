@@ -19,3 +19,6 @@ jobs:
         run: |
           echo "Current date: $(date)"
           echo "Running on branch: $GITHUB_REF_NAME"
+
+      - name: Verify index.html content
+        run: grep "Hello, world!" index.html
